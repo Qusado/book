@@ -9,7 +9,7 @@ const app = express()
 db.sequelize.sync();
 app.use(cors());
 
-const PORT = config.get('PORT') || 5000
+const PORT =  5000
 app.use(express.json({ extended: true }))
 app.use(express.static(path.resolve(__dirname, 'static')));
 app.use(fileUpload({}));
