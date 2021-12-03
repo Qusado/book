@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import { useHttp } from '../hooks/http.hook';
 import { useMessage } from '../hooks/message.hook';
 import {useHistory} from 'react-router-dom'
+import {$host} from "../http";
 
 export const AuthPage = () => {
     const message = useMessage()
@@ -14,6 +15,7 @@ export const AuthPage = () => {
     useEffect(() => {
         message(error)
         clearError()
+
     }, [error, message, clearError])
 
     const changeHandler = event => {
@@ -22,10 +24,22 @@ export const AuthPage = () => {
 
     const registerhandler = async () => {
         try {
-            const data = await request('/api/persons/register', 'POST', {...form})
-            message(data.message)
+            const fetched = await $host.post('/api/persons/register', {...form})
+                .catch(error => message(error.message));
+            const data = fetched.data;
+
+
+            //const data = fetched.data;
+            //console.log(data);
+           // message(data.response.data.message);
+
+
             history.push('/login')
-        } catch (e) {}
+            // const data = await request('/api/persons/register', 'POST', {...form})
+            // message(data.message)
+            // history.push('/login')
+        } catch (e) {
+        }
     }
 
     return(

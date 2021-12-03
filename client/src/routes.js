@@ -1,9 +1,11 @@
-import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { ProfilePage}  from './pages/profile.page.js'
-import { AuthPage } from './pages/auth.page.js'
-import { LoginPage } from './pages/login.page.js'
-import { MainPage } from './pages/main.page.js'
+import React from 'react';
+import {Switch} from 'react-router-dom';
+import {Route} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
+import { ProfilePage}  from './pages/profile.page.js';
+import { AuthPage } from './pages/auth.page.js';
+import { LoginPage } from './pages/login.page.js';
+import { MainPage } from './pages/main.page.js';
 import {ShopPage} from "./pages/shop.page";
 import {FavsPage} from "./pages/favs.page";
 import {AboutPage} from "./pages/about.page";

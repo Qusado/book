@@ -2,6 +2,7 @@ import React, {useCallback, useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/Auth.Context";
 import {useHttp} from "../hooks/http.hook";
 import {ExportCSV} from "../components/ExportExlsx";
+import {$host} from "../http";
 
 
 export const StatPages = () =>{
@@ -12,28 +13,28 @@ export const StatPages = () =>{
 
     const getPersons = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/books/statistic/owners_statistic`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+
+            const fetched = await $host.get(`/api/books/statistic/owners_statistic`).then(res => {
+                const pers = res.data;
+                setPersons(pers)
             })
-            setPersons(fetched)
+
         } catch (e){}
     }, [token, request])
 
-    const getOwners = useCallback(async ()=>{
-        try{
-            const fetched = await request(`/api/books/owners`, 'GET', null, {
-                Authorization : `Bearer ${token}`
-            })
-            setOwners(fetched)
-
-        } catch (e){ }
-    }, [token, request])
+    // const getOwners = useCallback(async ()=>{
+    //     try{
+    //         const fetched = await $host.get(`/api/books/owners`).then(res=>{
+    //             const owners = res.data;
+    //             setOwners(owners)
+    //         })
+    //     } catch (e){ }
+    // }, [token, request])
 
 
     useEffect( () =>{
         getPersons()
-        getOwners()
-    }, [getPersons, getOwners ])
+    }, [getPersons])
     return(
         <div className="container">
             <div className="row">
@@ -62,7 +63,6 @@ export const StatPages = () =>{
                 <ExportCSV csvData={persons} fileName="Lox" />}
             </div>
             <div className="row">
-                {/*<Chart persons={persons}/>*/}
             </div>
 
         </div>

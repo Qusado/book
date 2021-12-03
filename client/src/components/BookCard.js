@@ -8,16 +8,16 @@ export const BookCard =({book, authors, pub, cat})=> {
                 <div className="col-md-4">
                     <div className="div_book">
                         <div style={{overflow: 'hidden'}}>
-                            <img className="book_img" src={`/${book.images}`}/>
+                            <img className="book_img" src={process.env.REACT_APP_API_URL+`/${book.images}`}/>
                         </div>
                         <div className="row text-center">
                             <Link className="" to="#">
                                 <button className='btn but_price m-1'>{book.price} p.</button>
                             </Link>
-                            <Link className="" to={`/toOrder/${book.id_book}`}>
+                            <Link className="" to={process.env.REACT_APP_API_URL+ `/toOrder/${book.id_book}`}>
                                 <button className='btn but_book btn-light m-1'>В корзину</button>
                             </Link>
-                            <Link className="" to={`/toList/${book.id_book}`}>
+                            <Link className="" to={process.env.REACT_APP_API_URL+ `/toList/${book.id_book}`}>
                                 <button className='btn but_book btn-light m-1'>Отложить</button>
                             </Link>
                         </div>

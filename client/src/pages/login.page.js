@@ -3,6 +3,7 @@ import {NavLink, useHistory} from "react-router-dom";
 import { AuthContext } from '../context/Auth.Context.js';
 import { useHttp } from '../hooks/http.hook';
 import { useMessage } from '../hooks/message.hook';
+import {$host} from "../http";
 
 
 export const LoginPage = () => {
@@ -25,11 +26,12 @@ export const LoginPage = () => {
 
     const loginhandler = async () => {
         try {
-            const data = await request('/api/persons/login', 'POST', {...form})
-            auth.login(data.token, data.userId)
+           const data = await $host.post('/api/persons/login',{...form})
+               .catch(error => message(error.data.message))
+               .then(response => auth.login(response.data.token, response.data.userId));
             history.push("/profile");
         } catch (e) {}
-        //}
+
     }
     return(
         <div className="container">

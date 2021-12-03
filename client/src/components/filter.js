@@ -2,6 +2,7 @@ import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {Tab, Tabs} from "react-bootstrap";
 import {AuthContext} from "../context/Auth.Context";
 import {useHttp} from "../hooks/http.hook";
+import {$host} from "../http";
 
 export const Filter = (props) => {
 
@@ -12,10 +13,10 @@ export const Filter = (props) => {
 
     const getCats = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/category/`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/category/`).then(res => {
+                const res_cats = res.data;
+                setCats(res_cats)
             })
-            setCats(fetched)
         } catch (e){
 
         }

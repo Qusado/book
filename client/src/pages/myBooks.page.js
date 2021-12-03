@@ -2,6 +2,7 @@ import React, {useCallback, useContext, useEffect, useState} from "react";
 import {useHttp} from "../hooks/http.hook";
 import {AuthContext} from "../context/Auth.Context";
 import {Link} from "react-router-dom";
+import {$authHost, $host} from "../http";
 
 
 export const MyBooksPage = () =>{
@@ -11,10 +12,10 @@ export const MyBooksPage = () =>{
 
     const getBooks = useCallback(async ()=>{
         try{
-             const fetched = await request(`/api/books/profile/myBooks`, 'GET', null, {
-                 Authorization : `Bearer ${token}`
-             })
-            setBooks(fetched)
+            const fetched = await $authHost.get(`/api/books/profile/myBooks`).then(res => {
+                const books = res.data;
+                setBooks(books)
+            })
         } catch (e){
 
         }

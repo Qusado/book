@@ -3,6 +3,7 @@ import {useHttp} from "../hooks/http.hook";
 import {AuthContext} from "../context/Auth.Context";
 import {Catalog} from "../components/catalog";
 import {Filter} from "../components/filter";
+import {$host} from "../http";
 
 
 export const CatalogPage = () =>{
@@ -18,11 +19,16 @@ export const CatalogPage = () =>{
 
     const getBooks = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/books/`, 'GET', null, {
-                Authorization : `Bearer ${token}`
-            });
-            setBooks(fetched)
-            setSearchResults(fetched)
+            // const fetched = await request(`/api/books/`, 'GET', null, {
+            //     Authorization : `Bearer ${token}`
+            // });
+            // setBooks(fetched)
+            // setSearchResults(fetched)
+            const fetched = await $host.get(`/api/books`).then(res => {
+                const book = res.data;
+                setBooks(book)
+                setSearchResults(book)
+            })
 
         } catch (e){
 

@@ -14,6 +14,8 @@ export const AddBookPage = () =>{
     const [pubs, setPubs] = useState()
     const [cats, setCats] = useState()
     const [authors, setAuthors] = useState()
+
+
      const getAuthor = useCallback(async ()=>{
         try{
             const fetched = await request(`/api/authors/`, 'GET', null, {

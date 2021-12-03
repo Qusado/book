@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom'
 import {useHttp} from "../hooks/http.hook";
 import {AuthContext} from "../context/Auth.Context";
 import {BookCard} from '../components/BookCard.js';
+import {$host} from "../http";
 
 
 export const BookPage = () =>{
@@ -13,12 +14,13 @@ export const BookPage = () =>{
     const [book, setBook] = useState()
     const [authors, setAuthors] = useState()
     const book_id = useParams().id_book
+
     const getBook = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/books/${book_id}`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/books/${book_id}`).then(res => {
+                const book = res.data;
+                setBook(book)
             })
-           setBook(fetched)
         } catch (e){
 
         }
@@ -26,10 +28,11 @@ export const BookPage = () =>{
 
     const getAuthor = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/authors/${book_id}`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/authors/${book_id}`).then(res => {
+                const authors = res.data;
+                setAuthors(authors)
             })
-            setAuthors(fetched)
+
         } catch (e){
 
         }
@@ -37,10 +40,11 @@ export const BookPage = () =>{
 
     const getPub = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/publishers/${book_id}`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/publishers/${book_id}`).then(res => {
+                const pubs = res.data;
+                setPub(pubs)
             })
-            setPub(fetched)
+
         } catch (e){
 
         }
@@ -48,10 +52,11 @@ export const BookPage = () =>{
 
     const getCat = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/category/${book_id}`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/category/${book_id}`).then(res => {
+                const cats = res.data;
+                setCat(cats)
             })
-            setCat(fetched)
+
         } catch (e){
 
         }
