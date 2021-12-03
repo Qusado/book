@@ -17,7 +17,6 @@ export const ListPage = () =>{
             const fetched = await request(`/api/books/toList/${book_id}`, 'POST', null, {
                 Authorization : `Bearer ${token}`
             })
-            console.log('Data', fetched)
             history.push('/catalog')
 
         } catch (e){

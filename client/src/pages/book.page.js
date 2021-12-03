@@ -19,8 +19,6 @@ export const BookPage = () =>{
                 Authorization : `Bearer ${token}`
             })
            setBook(fetched)
-            console.log('Data', fetched)
-            console.log(book)
         } catch (e){
 
         }
@@ -32,8 +30,6 @@ export const BookPage = () =>{
                 Authorization : `Bearer ${token}`
             })
             setAuthors(fetched)
-            console.log('Data2', fetched)
-            console.log(authors)
         } catch (e){
 
         }
@@ -45,8 +41,6 @@ export const BookPage = () =>{
                 Authorization : `Bearer ${token}`
             })
             setPub(fetched)
-            console.log('Data', fetched)
-            console.log(pub)
         } catch (e){
 
         }
@@ -58,8 +52,6 @@ export const BookPage = () =>{
                 Authorization : `Bearer ${token}`
             })
             setCat(fetched)
-            console.log('Data', fetched)
-            console.log(cat)
         } catch (e){
 
         }

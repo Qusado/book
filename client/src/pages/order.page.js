@@ -16,9 +16,7 @@ export const OrderPage = () =>{
             const fetched = await request(`/api/books/toOrder/${book_id}`, 'POST', null, {
                 Authorization : `Bearer ${token}`
             })
-            console.log('Data', fetched)
             history.push('/catalog')
-
         } catch (e){
 
         }

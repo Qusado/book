@@ -17,9 +17,7 @@ export const DeletePage = () =>{
             const fetched = await request(`/api/books/delete/${book_id}`, 'DELETE', null, {
                 Authorization : `Bearer ${token}`
             })
-            console.log('Data', fetched)
             history.push('/profile/myBooks')
-
         } catch (e){
 
         }

@@ -28,8 +28,6 @@ export const EditBookPage = () =>{
                 Authorization : `Bearer ${token}`
             })
             setBook(fetched)
-            console.log('Data', fetched)
-         //
         } catch (e){
 
         }
@@ -53,8 +51,6 @@ export const EditBookPage = () =>{
                 Authorization : `Bearer ${token}`
             })
             setGenreByBook(fetched)
-            console.log('Data', fetched)
-            //
         } catch (e){
 
         }

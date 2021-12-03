@@ -15,7 +15,6 @@ export const ShopPage = () =>{
                 Authorization : `Bearer ${token}`
             })
             setBooks(fetched)
-            console.log('Data9', fetched)
         } catch (e){
 
         }

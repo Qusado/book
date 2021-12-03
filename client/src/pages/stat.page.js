@@ -16,8 +16,6 @@ export const StatPages = () =>{
                 Authorization : `Bearer ${token}`
             })
             setPersons(fetched)
-            console.log('vbbdbf');
-            console.log('Data9', fetched)
         } catch (e){}
     }, [token, request])
 
@@ -27,8 +25,6 @@ export const StatPages = () =>{
                 Authorization : `Bearer ${token}`
             })
             setOwners(fetched)
-            console.log('vbbdbf');
-            console.log('Data9', fetched)
 
         } catch (e){ }
     }, [token, request])

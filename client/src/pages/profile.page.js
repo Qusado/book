@@ -23,14 +23,11 @@ export const ProfilePage = () => {
     }, [token, request ])
 
     const getUser = useCallback(async ()=>{
-        console.log(userId)
         try{
             const fetched = await request(`/api/persons/${userId}`, 'GET', null, {
                 Authorization : `Bearer ${token}`
             })
-            console.log('Data', fetched)
             setUser(fetched)
-            console.log(user)
         } catch (e){
 
         }
