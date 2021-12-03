@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "//qusado.github.io/book/static/css/main.1d52b80c.chunk.css",
+    "main.js": "//qusado.github.io/book/static/js/main.1c0f5eca.chunk.js",
+    "main.js.map": "//qusado.github.io/book/static/js/main.1c0f5eca.chunk.js.map",
+    "runtime-main.js": "//qusado.github.io/book/static/js/runtime-main.4663eb5d.js",
+    "runtime-main.js.map": "//qusado.github.io/book/static/js/runtime-main.4663eb5d.js.map",
+    "static/js/2.fa74bbf3.chunk.js": "//qusado.github.io/book/static/js/2.fa74bbf3.chunk.js",
+    "static/js/2.fa74bbf3.chunk.js.map": "//qusado.github.io/book/static/js/2.fa74bbf3.chunk.js.map",
+    "static/js/3.990bf616.chunk.js": "//qusado.github.io/book/static/js/3.990bf616.chunk.js",
+    "static/js/3.990bf616.chunk.js.map": "//qusado.github.io/book/static/js/3.990bf616.chunk.js.map",
+    "index.html": "//qusado.github.io/book/index.html",
+    "static/css/main.1d52b80c.chunk.css.map": "//qusado.github.io/book/static/css/main.1d52b80c.chunk.css.map",
+    "static/js/2.fa74bbf3.chunk.js.LICENSE.txt": "//qusado.github.io/book/static/js/2.fa74bbf3.chunk.js.LICENSE.txt",
+    "static/media/index.css": "//qusado.github.io/book/static/media/v43_2.05e7c4dd.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4663eb5d.js",
+    "static/js/2.fa74bbf3.chunk.js",
+    "static/css/main.1d52b80c.chunk.css",
+    "static/js/main.1c0f5eca.chunk.js"
+  ]
+}
