@@ -21,6 +21,9 @@ exports.findAll = async (req, res) => {
 
 
 exports.myBooks = async (req, res) =>{
+    // console.log("p", req.params)
+    // console.log("q",req.query)
+    // console.log("b",req.body)
     const id_user = req.params.id_user;
     Book.findAll({ where: { owners: id_user } })
         .then(data => {
@@ -82,13 +85,16 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
     const id_book = req.params.id_book;
-
+console.log(id_book);
     Book_authors.destroy({where: {book_fk: id_book}})
+    console.log("dscsd")
     Book_genre.destroy({where: {book_fk: id_book}})
+    console.log("dscsd2")
     Book.destroy({
         where: { id_book: id_book }
     }).then(num => {
-        if (num == 1) {
+        console.log(num)
+        if (num === 1) {
             res.send({
                 message: "Was deleted successfully!"
             });
@@ -97,8 +103,7 @@ exports.delete = (req, res) => {
                 message: `Cannot delete  with id=${id_book}. Maybe elem was not found!`
             });
         }
-    })
-        .catch(err => {
+    }).catch(err => {
             res.status(500).send({
                 message: "Could not delete with id=" + id_book
             });

@@ -3,6 +3,7 @@ import {AuthContext} from "../context/Auth.Context";
 import {useHttp} from "../hooks/http.hook";
 import {useHistory, useParams} from "react-router-dom";
 import {useMessage} from "../hooks/message.hook";
+import {$host} from "../http";
 
 export const AddBookPage = () =>{
 
@@ -18,10 +19,17 @@ export const AddBookPage = () =>{
 
      const getAuthor = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/authors/`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/authors/`, {
+                params: {
+                    id_user: userId
+                },
+                headers:{
+                    authorization:"Bearer "+token,
+                }
+            }).then(res=>{
+                const auts = res.data;
+                setAuthors(auts)
             })
-            setAuthors(fetched)
         } catch (e){
 
         }
@@ -29,10 +37,17 @@ export const AddBookPage = () =>{
 
     const getPub = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/publishers/`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/publishers/`, {
+                params: {
+                    id_user: userId
+                },
+                headers:{
+                    authorization:"Bearer "+token,
+                }
+            }).then(res=>{
+                const pubs = res.data;
+                setPubs(pubs)
             })
-            setPubs(fetched)
         } catch (e){
 
         }
@@ -40,10 +55,17 @@ export const AddBookPage = () =>{
 
     const getCats = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/category/`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/category/`, {
+                params: {
+                    id_user: userId
+                },
+                headers:{
+                    authorization:"Bearer "+token,
+                }
+            }).then(res=>{
+                const cats = res.data;
+                setCats(cats)
             })
-            setCats(fetched)
         } catch (e){
 
         }
@@ -51,10 +73,18 @@ export const AddBookPage = () =>{
 
     const getGen = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/genres/`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+
+            const fetched = await $host.get(`/api/genres/`, {
+                params: {
+                    id_user: userId
+                },
+                headers:{
+                    authorization:"Bearer "+token,
+                }
+            }).then(res=>{
+                const gens = res.data;
+                setGenres(gens)
             })
-            setGenres(fetched)
         } catch (e){
 
         }
@@ -87,7 +117,7 @@ export const AddBookPage = () =>{
                 },
                 body: formData
             };
-            const response = await fetch(`/api/books/`, requestOptions);
+            const response = await fetch(process.env.REACT_APP_API_URL+`/api/books/`, requestOptions);
             const data = await response.json();
             message(data.message);
                if(response.status === 201){

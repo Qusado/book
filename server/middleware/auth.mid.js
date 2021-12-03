@@ -10,16 +10,16 @@ module.exports = (req, res, next) => {
 
         if (!token){
             return res.status(401).json({
-                message: "Нет авторизации"
+                message: "Нет токена"
             })
         }
-
+        console.log("bfgb",token);
         const decoded = jwt.verify(token, 'lox')
         req.user = decoded
         next()
     }catch (e){
         return res.status(401).json({
-            message: "Нет авторизации"
+            message: "Неверный токен"
         })
 
     }}

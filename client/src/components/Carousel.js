@@ -27,7 +27,7 @@ export const Carousel =({ones, twos})=> {
                                                         <h5>{ones[0].title}</h5>
                                                         <div className="card-body">
                                                             <p>{ones[0].demo}</p>
-                                                            <img src={process.env.REACT_APP_API_URL +`/${ones[0].images}`}/>
+                                                            <img className="im_carousel" src={process.env.REACT_APP_API_URL +`/${ones[0].images}`}/>
                                                         </div>
                                                     </div>
                                                 </Link>

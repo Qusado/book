@@ -3,7 +3,7 @@ import {Link, useHistory, useParams} from 'react-router-dom'
 import {AuthContext} from "../context/Auth.Context";
 import {useHttp} from "../hooks/http.hook";
 import {Use} from '../components/User.js'
-import {$authHost} from "../http";
+import {$authHost, $host} from "../http";
 
 export const ProfilePage = () => {
     const {token} = useContext(AuthContext)
@@ -14,7 +14,15 @@ export const ProfilePage = () => {
 
     const getBooks = useCallback(async ()=>{
         try{
-            const fetched = await $authHost.get(`/api/books/profile/myBooks`).then(res => {
+            const fetched = await $host.get('/api/books/profile/myBooks', {
+                    params: {
+                        id_user: userId
+                    },
+                    headers:{
+                        authorization:"Bearer "+token,
+                    }
+                }
+            ).then(res => {
                 const books = res.data;
                 setBooks(books)
             })

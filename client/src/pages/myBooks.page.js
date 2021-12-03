@@ -2,17 +2,25 @@ import React, {useCallback, useContext, useEffect, useState} from "react";
 import {useHttp} from "../hooks/http.hook";
 import {AuthContext} from "../context/Auth.Context";
 import {Link} from "react-router-dom";
-import {$authHost, $host} from "../http";
+import { $host} from "../http";
 
 
 export const MyBooksPage = () =>{
-    const {token} = useContext(AuthContext)
+    const {userId, token} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const [books, setBooks] = useState()
 
     const getBooks = useCallback(async ()=>{
         try{
-            const fetched = await $authHost.get(`/api/books/profile/myBooks`).then(res => {
+            const fetched = await $host.get('/api/books/profile/myBooks', {
+                    params: {
+                        id_user: userId
+                    },
+                    headers:{
+                        authorization:"Bearer "+token,
+                    }
+                }
+                ).then(res => {
                 const books = res.data;
                 setBooks(books)
             })

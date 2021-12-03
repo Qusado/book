@@ -3,20 +3,21 @@ import {useMessage} from "../hooks/message.hook";
 import {AuthContext} from "../context/Auth.Context";
 import {useHttp} from "../hooks/http.hook";
 import { useHistory, useParams} from "react-router-dom";
+import {$host} from "../http";
 
 export const EditBookPage = () =>{
     const message = useMessage()
     const history = useHistory()
-    const {token} = useContext(AuthContext)
+    const {token, userId} = useContext(AuthContext)
     const {request, loading, error, clearError} = useHttp()
     const [genres, setGenres] = useState()
     const [pubs, setPubs] = useState()
     const [cats, setCats] = useState()
     const [authors, setAuthors] = useState()
     const [book, setBook] = useState()
-    const [form, setForm] = useState({
-        title: '', author: '', pub: '', gen:'', cat:'', price:'', demo:'', images:''
-    })
+    // const [form, setForm] = useState({
+    //     title: '', author: '', pub: '', gen:'', cat:'', price:'', demo:'', images:''
+    // })
     const [authorByBook, setAuthorByBook] = useState()
     const [genreByBook, setGenreByBook] = useState()
 
@@ -24,10 +25,17 @@ export const EditBookPage = () =>{
 
     const getBook = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/books/${book_id}`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/books/${book_id}`, {
+                params: {
+                    id_user: userId
+                },
+                headers:{
+                    authorization:"Bearer "+token,
+                }
+            }).then(res=>{
+                const books = res.data;
+                setBook(books)
             })
-            setBook(fetched)
         } catch (e){
 
         }
@@ -35,10 +43,17 @@ export const EditBookPage = () =>{
 
     const getBook_author = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/authors/${book_id}`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/authors/${book_id}`, {
+                params: {
+                    id_user: userId
+                },
+                headers:{
+                    authorization:"Bearer "+token,
+                }
+            }).then(res=>{
+                const a_b = res.data;
+                setAuthorByBook(a_b)
             })
-            setAuthorByBook(fetched)
             } catch (e){
 
             }
@@ -47,10 +62,17 @@ export const EditBookPage = () =>{
 
     const getBook_genre = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/genres/${book_id}`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/genres/${book_id}`, {
+                params: {
+                    id_user: userId
+                },
+                headers:{
+                    authorization:"Bearer "+token,
+                }
+            }).then(res=>{
+                const g_b = res.data;
+                setGenreByBook(g_b)
             })
-            setGenreByBook(fetched)
         } catch (e){
 
         }
@@ -58,51 +80,76 @@ export const EditBookPage = () =>{
 
     const getAuthor = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/authors/`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/authors/`, {
+                params: {
+                    id_user: userId
+                },
+                headers:{
+                    authorization:"Bearer "+token,
+                }
+            }).then(res=>{
+                const auts = res.data;
+                setAuthors(auts)
             })
-            setAuthors(fetched)
         } catch (e){
 
         }
-    }, [])
+    }, [token, request ])
 
     const getPub = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/publishers/`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/publishers/`, {
+                params: {
+                    id_user: userId
+                },
+                headers:{
+                    authorization:"Bearer "+token,
+                }
+            }).then(res=>{
+                const pubs = res.data;
+                setPubs(pubs)
             })
-            setPubs(fetched)
-
         } catch (e){
 
         }
-    }, [])
+    }, [token, request ])
 
     const getCats = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/category/`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+            const fetched = await $host.get(`/api/category/`, {
+                params: {
+                    id_user: userId
+                },
+                headers:{
+                    authorization:"Bearer "+token,
+                }
+            }).then(res=>{
+                const cats = res.data;
+                setCats(cats)
             })
-            setCats(fetched)
-
         } catch (e){
 
         }
-    }, [])
+    }, [token, request ])
 
     const getGen = useCallback(async ()=>{
         try{
-            const fetched = await request(`/api/genres/`, 'GET', null, {
-                Authorization : `Bearer ${token}`
+
+            const fetched = await $host.get(`/api/genres/`, {
+                params: {
+                    id_user: userId
+                },
+                headers:{
+                    authorization:"Bearer "+token,
+                }
+            }).then(res=>{
+                const gens = res.data;
+                setGenres(gens)
             })
-            setGenres(fetched)
-
-
         } catch (e){
 
         }
-    }, [])
+    }, [token,  request ])
 
     useEffect( () =>{
 
@@ -117,15 +164,34 @@ export const EditBookPage = () =>{
         getBook_genre()
     }, [])
 
-    const changeHandler = event => {
-        setForm({...form, [event.target.name]: event.target.value })
-    }
 
     const edithandler = async () => {
         try {
-            const data = await request(`/api/books/update/${book_id}`, 'PUT', {...form})
-            console.log('Data', data)
-            history.push("/profile/myBooks");
+            var form = document.querySelector('form');
+            var formData = new FormData(form);
+            console.log("form",...formData)
+            const requestOptions = {
+                method: 'PUT',
+                headers: {
+                    Authorization : `Bearer ${token}`,
+                    ContentType : `multipart/form-data`,
+                    Accept : "application/json",
+                    type : "formData",
+                    user_id : userId
+                },
+                body: formData
+            };
+            const response = await fetch(process.env.REACT_APP_API_URL+`/api/books/update/${book_id}`, requestOptions);
+            const data = await response.json();
+            message(data.message);
+            if(response.status === 201){
+                history.push("/profile/myBooks");
+            }
+
+
+           // const data = await request(`/api/books/update/${book_id}`, 'PUT', {...form})
+           // console.log('Data', data)
+           // history.push("/profile/myBooks");
         } catch (e) {}
     }
 
@@ -135,7 +201,7 @@ export const EditBookPage = () =>{
             <h5 className="text-center color_block">Редактирование книги</h5>
 
             <div>
-                <div className="row">
+                <form className="row" id="form">
                     <div className="col-7">
 
                         <div className="mb-3 row">
@@ -146,7 +212,6 @@ export const EditBookPage = () =>{
                                     className="form-control form-control-sm"
                                     id="title"
                                     name="title"
-                                    onChange={changeHandler}
                                     value = {!loading && book && book.title}
                                 />
                             </div>
@@ -158,7 +223,6 @@ export const EditBookPage = () =>{
                                         aria-label="select example"
                                         id="author"
                                         name="author"
-                                        onChange={changeHandler}
                                         value = {!loading && authorByBook && authorByBook.y}
                                 >
                                     {!loading && authors && authors.map((author, index) => {
@@ -182,7 +246,6 @@ export const EditBookPage = () =>{
                                     aria-label="Default select example"
                                     id="pub"
                                     name="pub"
-                                    onChange={changeHandler}
                                     value={!loading && book && book.pub_fk}
                                 >
                                     {!loading && pubs && pubs.map((pub, index) => {
@@ -206,7 +269,6 @@ export const EditBookPage = () =>{
                                     aria-label="Default select example"
                                     id="gen"
                                     name="gen"
-                                    onChange={changeHandler}
                                     value = {!loading && genreByBook && genreByBook.id_genre}
                                 >
                                     {!loading && genres && genres.map((genre, index) => {
@@ -229,7 +291,6 @@ export const EditBookPage = () =>{
                                         aria-label="Default select example"
                                         id="cat"
                                         name="cat"
-                                        onChange={changeHandler}
                                         value={!loading && book && book.cat_fk}
                                     // onChange={e=>setBook(e.target.value)}
 
@@ -254,7 +315,6 @@ export const EditBookPage = () =>{
                                     className="form-control form-control-sm"
                                     id="price"
                                     name="price"
-                                    onChange={changeHandler}
                                     value = {!loading && book && book.price}
                                 />
                             </div>
@@ -266,7 +326,6 @@ export const EditBookPage = () =>{
                                     className="form-control form-control-sm"
                                     name="demo"
                                     id="demo"    rows="3"
-                                    onChange={changeHandler}
                                     value = {!loading && book && book.demo}
                                 >
 
@@ -283,7 +342,7 @@ export const EditBookPage = () =>{
                                        type="file"
                                        id="images"
                                        name="images"
-                                       //value = {}
+
                                 />
                             </div>
                         </div>
@@ -292,6 +351,7 @@ export const EditBookPage = () =>{
                         </div>
                         <div className="add">
                             <button
+                                type="button"
                                 className="btn btn-light m-1 add_but"
                                 onClick={edithandler}
                                 disabled={loading}
@@ -301,7 +361,7 @@ export const EditBookPage = () =>{
                             </button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     )

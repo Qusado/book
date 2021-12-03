@@ -12,7 +12,7 @@ export const Catalog =({books})=> {
                                <Link className="Nav_link" to={`/books/${book.id_book}`}> <h6>{book.title}</h6></Link>
                                <div className="card-body">
                                    <div className="box_img">
-                                       <img className="mini_book" src={`../${book.images}`}/>
+                                       <img className="mini_book" src={process.env.REACT_APP_API_URL+`/${book.images}`}/>
                                    </div>
                                    <button className='btn but_price2'>{book.price} p.</button>
                                </div>

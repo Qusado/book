@@ -10,7 +10,11 @@ exports.findOneByBook = async (req, res) => {
             type: QueryTypes.SELECT
         }).then(results => {
         res.send(results);
-    })
+    }).catch(err => {
+        res.status(500).send({
+            message: "Could not delete with id=" + id_book
+        });
+    });
 };
 exports.getAll = async (req, res) =>{
     Genre.findAll()
