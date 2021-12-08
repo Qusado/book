@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 import {$authHost} from "../http";
+import {baseUrl} from "./baseRoute";
 
 export const Carousel =({ones, twos})=> {
     console.log(ones);
@@ -27,7 +28,7 @@ export const Carousel =({ones, twos})=> {
                                                         <h5>{ones[0].title}</h5>
                                                         <div className="card-body">
                                                             <p>{ones[0].demo}</p>
-                                                            <img className="im_carousel" src={process.env.REACT_APP_API_URL +`/${ones[0].images}`}/>
+                                                            <img className="im_carousel" src={baseUrl+`/${ones[0].images}`}/>
                                                         </div>
                                                     </div>
                                                 </Link>
@@ -39,7 +40,7 @@ export const Carousel =({ones, twos})=> {
                                                         <h5>{ones[1].title}</h5>
                                                         <div className="card-body">
                                                             <p>{ones[1].demo}</p>
-                                                            <img className="im_carousel" src={process.env.REACT_APP_API_URL +`/${ones[1].images}`}/>
+                                                            <img className="im_carousel" src={baseUrl +`/${ones[1].images}`}/>
                                                         </div>
                                                     </div>
                                                 </Link>
@@ -52,7 +53,7 @@ export const Carousel =({ones, twos})=> {
 
                                                         <div className="card-body">
                                                             <p>{ones[2].demo}</p>
-                                                            <img className="im_carousel" src={process.env.REACT_APP_API_URL +`/${ones[2].images}`}/>
+                                                            <img className="im_carousel" src={baseUrl +`/${ones[2].images}`}/>
                                                         </div>
                                                     </div>
                                                 </Link>
@@ -66,7 +67,7 @@ export const Carousel =({ones, twos})=> {
                                                         <h5>{ones[3].title}</h5>
                                                         <div className="card-body">
                                                             <p>{ones[3].demo}</p>
-                                                            <img className="im_carousel" src={process.env.REACT_APP_API_URL +`/${ones[3].images}`}/>
+                                                            <img className="im_carousel" src={baseUrl +`/${ones[3].images}`}/>
                                                         </div>
                                                     </div>
                                                 </Link>
@@ -100,7 +101,7 @@ export const Carousel =({ones, twos})=> {
                                                         <h5>{twos[0].title}</h5>
                                                         <div className="card-body">
                                                             <p>{twos[0].demo}</p>
-                                                            <img className="im_carousel" src={process.env.REACT_APP_API_URL +`/${twos[0].images}`}/>
+                                                            <img className="im_carousel" src={baseUrl +`/${twos[0].images}`}/>
                                                         </div>
                                                     </div>
                                                 </Link>
@@ -112,7 +113,7 @@ export const Carousel =({ones, twos})=> {
                                                          <h5>{twos[1].title}</h5>
                                                         <div className="card-body">
                                                             <p>{twos[1].demo}</p>
-                                                            <img className="im_carousel" src={process.env.REACT_APP_API_URL +`/${twos[1].images}`}/>
+                                                            <img className="im_carousel" src={baseUrl +`/${twos[1].images}`}/>
 
                                                         </div>
                                                     </div>
@@ -124,7 +125,7 @@ export const Carousel =({ones, twos})=> {
                                                          <h5>{twos[2].title}</h5>
                                                         <div className="card-body">
                                                             <p>{twos[2].demo}</p>
-                                                            <img className="im_carousel" src={process.env.REACT_APP_API_URL +`/${twos[2].images}`}/>
+                                                            <img className="im_carousel" src={baseUrl +`/${twos[2].images}`}/>
 
                                                         </div>
                                                     </div>
@@ -136,7 +137,7 @@ export const Carousel =({ones, twos})=> {
                                                         <h5>{twos[3].title}</h5>
                                                         <div className="card-body">
                                                             <p>{twos[3].demo}</p>
-                                                            <img className="im_carousel" src={process.env.REACT_APP_API_URL +`/${twos[3].images}`}/>
+                                                            <img className="im_carousel" src={baseUrl +`/${twos[3].images}`}/>
 
                                                         </div>
                                                     </div>

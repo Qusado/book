@@ -30,24 +30,24 @@ export const useRoutes = isAuthenticated => {
                 <Route path="/profile" exact>
                     <ProfilePage />
                 </Route>
-                <Route exact path="me" component={ProfilePage}/>
+                <Route exact path="/me" component={ProfilePage}/>
                 <Route exact path="/" component={MainPage}/>
-                <Route exact path="catalog" component={CatalogPage}/>
-                <Route exact path="about" component={AboutPage}/>
-                <Route exact path="statistic" component={StatPages}/>
+                <Route exact path="/catalog" component={CatalogPage}/>
+                <Route exact path="/about" component={AboutPage}/>
+                <Route exact path="/statistic" component={StatPages}/>
 
-                <Route exact path="toOrder/:id_book" component={OrderPage}/>
-                <Route exact path="shop" component={ShopPage}/>
+                <Route exact path="/toOrder/:id_book" component={OrderPage}/>
+                <Route exact path="/shop" component={ShopPage}/>
 
-                <Route exact path="toList/:id_book" component={ListPage}/>
-                <Route exact path="favs" component={FavsPage}/>
+                <Route exact path="/toList/:id_book" component={ListPage}/>
+                <Route exact path="/favs" component={FavsPage}/>
 
-                <Route exact path="book/add" component={AddBookPage}/>
-                <Route exact path="book/edit/:id_book" component={EditBookPage}/>
-                <Route exact path="book/delete/:id_book" component={DeletePage}/>
+                <Route exact path="/book/add" component={AddBookPage}/>
+                <Route exact path="/book/edit/:id_book" component={EditBookPage}/>
+                <Route exact path="/book/delete/:id_book" component={DeletePage}/>
 
-                <Route exact path="books/:id_book" component={BookPage}/>
-                <Route exact path="profile/myBooks" component={MyBooksPage}/>
+                <Route exact path="/books/:id_book" component={BookPage}/>
+                <Route exact path="/profile/myBooks" component={MyBooksPage}/>
 
 
                 <Logout exact/>

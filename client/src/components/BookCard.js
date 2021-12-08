@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-
+import {baseUrl} from  "./baseRoute"
 export const BookCard =({book, authors, pub, cat})=> {
     return(
         <div className="container">
@@ -8,7 +8,7 @@ export const BookCard =({book, authors, pub, cat})=> {
                 <div className="col-md-4">
                     <div className="div_book">
                         <div style={{overflow: 'hidden'}}>
-                            <img className="book_img" src={process.env.REACT_APP_API_URL +`/${book.images}`}/>
+                            <img className="book_img" src={baseUrl+`/${book.images}`}/>
                         </div>
                         <div className="row text-center">
                             <Link className="" to="#">

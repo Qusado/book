@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 import {$authHost} from "../http";
+import {baseUrl} from "./baseRoute";
 
 export const Catalog =({books})=> {
    return(
@@ -12,7 +13,7 @@ export const Catalog =({books})=> {
                                <Link className="Nav_link" to={`/books/${book.id_book}`}> <h6>{book.title}</h6></Link>
                                <div className="card-body">
                                    <div className="box_img">
-                                       <img className="mini_book" src={process.env.REACT_APP_API_URL+`/${book.images}`}/>
+                                       <img className="mini_book" src={baseUrl+`/${book.images}`}/>
                                    </div>
                                    <button className='btn but_price2'>{book.price} p.</button>
                                </div>

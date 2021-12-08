@@ -4,6 +4,8 @@ import {AuthContext} from "../context/Auth.Context";
 import {useHttp} from "../hooks/http.hook";
 import { useHistory, useParams} from "react-router-dom";
 import {$host} from "../http";
+import {baseUrl} from "../components/baseRoute.js";
+
 
 export const EditBookPage = () =>{
     const message = useMessage()
@@ -181,7 +183,7 @@ export const EditBookPage = () =>{
                 },
                 body: formData
             };
-            const response = await fetch(process.env.REACT_APP_API_URL+`/api/books/update/${book_id}`, requestOptions);
+            const response = await fetch(baseUrl+`/api/books/update/${book_id}`, requestOptions);
             const data = await response.json();
             message(data.message);
             if(response.status === 201){
