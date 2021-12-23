@@ -1,5 +1,4 @@
 {
-  "homepage": "https://qusado.github.io/book/",
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -21,7 +20,7 @@
     "web-vitals": "^1.1.2",
     "xlsx": "^0.17.4"
   },
-  "proxy": "https://qusado.ru",
+  "proxy": "http://localhost:5000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

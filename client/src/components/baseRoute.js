@@ -1,1 +1,1 @@
-export const baseUrl = 'https://qusado.ru';
+export const baseUrl = 'http://localhost:5000';
