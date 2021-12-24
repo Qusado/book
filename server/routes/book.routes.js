@@ -26,7 +26,7 @@ module.exports = app => {
         check('demo', 'Не заполнена аннотация').isLength({ min: 1 })
     ], async (req, res) => {
         try{
-            const id_user = req.params['id_user'];
+            const id_user = req.headers["id_user"];
             console.log(id_user);
             const errors = validationResult(req)
 

@@ -108,24 +108,47 @@ export const AddBookPage = () =>{
             var form = document.querySelector('form');
             var formData = new FormData(form);
             console.log("form",...formData)
-            const requestOptions = {
-                method: 'POST',
-                headers: {
+            // const requestOptions = {
+            //     method: 'POST',
+            //     headers: {
+            //         Authorization : `Bearer ${token}`,
+            //         ContentType : `multipart/form-data`,
+            //         Accept : "application/json",
+            //         type : "formData",
+            //         user_id : userId
+            //     },
+            //     body: formData
+            // };
+
+            const fetched = await $host.post(`/api/books/`, formData,  {
+                params: {
+                    id_user: userId
+                },
+                headers:{
                     Authorization : `Bearer ${token}`,
                     ContentType : `multipart/form-data`,
                     Accept : "application/json",
                     type : "formData",
-                    user_id : userId
-                },
-                body: formData
-            };
-            const response = await fetch(baseUrl+`/api/books/`, requestOptions);
-            const data = await response.json();
-            message(data.message);
-               if(response.status === 201){
-                   history.push("/catalog");
-               }
-        } catch (e) {}
+                    id_user : userId
+                }
+            }).catch(error=>{
+                message(error.response.data.message)
+            }).then(res =>{
+                const data = res.data;
+                message(data.message);
+                if(data.status === 201){
+                    history.push("/catalog");
+                }
+            })
+            // const response = await fetch(baseUrl+`/api/books/`, requestOptions);
+            // const data = await response.json();
+            // message(data.message);
+            //    if(response.status === 201){
+            //        history.push("/catalog");
+            //    }
+        } catch (e) {
+
+        }
     }
 
     return(

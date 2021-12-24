@@ -214,7 +214,7 @@ export const EditBookPage = () =>{
                                     className="form-control form-control-sm"
                                     id="title"
                                     name="title"
-                                    value = {!loading && book && book.title}
+                                    defaultValue = {!loading && book && book.title}
                                 />
                             </div>
                         </div>
@@ -317,7 +317,7 @@ export const EditBookPage = () =>{
                                     className="form-control form-control-sm"
                                     id="price"
                                     name="price"
-                                    value = {!loading && book && book.price}
+                                    defaultValue = {!loading && book && book.price}
                                 />
                             </div>
                         </div>
@@ -328,7 +328,7 @@ export const EditBookPage = () =>{
                                     className="form-control form-control-sm"
                                     name="demo"
                                     id="demo"    rows="3"
-                                    value = {!loading && book && book.demo}
+                                    defaultValue = {!loading && book && book.demo}
                                 >
 
                                 </textarea>
@@ -344,7 +344,6 @@ export const EditBookPage = () =>{
                                        type="file"
                                        id="images"
                                        name="images"
-
                                 />
                             </div>
                         </div>
